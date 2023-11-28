@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use Illuminate\View\View;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,19 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
+
+/* --- Auth Controller ---*/
+Route::get('/', [UserController::class, 'Login']);
+Route::post('/login', [UserController::class, 'handleLogin'])->name('login'); 
+
+
+Route::get('/register', [UserController::class, 'Register'])->name('register');
+Route::post('/postregister', [UserController::class, 'handleRegister'])->name('postregister');
+
 
 Route::get('/datatable', [PageController::class, 'datatable']);
 Route::get('/basic-table', [PageController::class, 'basictable']);
+
+
+Route::get('/dashboard', [PageController::class, 'dashboard'])->name('accueil');

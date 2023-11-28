@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function index():view
+    public function dashboard():view
     {
         return view('index');
     }
@@ -26,11 +27,6 @@ class PageController extends Controller
     public function basictable()
     {
         return view('tables.basic-table');
-    }
-
-    public function login():view
-    {
-        return view('login');
     }
 
     public function register():view
