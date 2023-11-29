@@ -12,6 +12,7 @@ use illuminate\support\facades\Auth;
 class UserController extends Controller
 {
     public function Login():view {
+
         return view('samples.login');
     }
 
@@ -39,7 +40,12 @@ class UserController extends Controller
 
     public function Register():view {
 
-        return view('samples.register');
+        if(Auth()->guest()){
+            
+            return view('samples.register');
+        } 
+        else
+            redirect('login');
     }
 
     public function handleRegister(User $user, LoginRequest $request) {
@@ -51,6 +57,17 @@ class UserController extends Controller
         return redirect()->intended('dashboard');
         
     }
+
+    public function Logout(Request $request): RedirectResponse {
+
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
+    }       
 
     public function messages() {
 

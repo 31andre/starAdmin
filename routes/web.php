@@ -18,13 +18,15 @@ use App\Http\Controllers\UserController;
 
 
 
-/* --- Auth Controller ---*/
-Route::get('/', [UserController::class, 'Login']);
-Route::post('/login', [UserController::class, 'handleLogin'])->name('login'); 
+                /* --- Auth Controller ---*/
+        Route::get('/', [UserController::class, 'Login']);
+        Route::post('/login', [UserController::class, 'handleLogin'])->name('login'); 
 
 
-Route::get('/register', [UserController::class, 'Register'])->name('register');
-Route::post('/postregister', [UserController::class, 'handleRegister'])->name('postregister');
+        Route::get('/register', [UserController::class, 'Register'])->name('register');
+        Route::post('/postregister', [UserController::class, 'handleRegister'])->name('postregister');
+
+        Route::get('/logout', function() {Auth()->logout();session()->flush();return redirect('/');})->name('deconnexion');
 
 
 Route::get('/datatable', [PageController::class, 'datatable']);
