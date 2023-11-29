@@ -21,11 +21,13 @@ class UserController extends Controller
         'email' => ['required', 'email'],
         'password' => ['required']
        ]);
+   
 
        if(Auth::attempt($validation)){
-            $validation->session()->regenerate();
 
-            return redirect()->intended('dashboard')->with('Votre compte a été creer success');
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard')->with("Connecté");
        }
        
        else
