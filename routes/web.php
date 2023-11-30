@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\View\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
-use Illuminate\View\View;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\loginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,19 +20,30 @@ use App\Http\Controllers\UserController;
 
 
                 /* --- Auth Controller ---*/
-        Route::controller(UserController::class)->group(function() {
+
+        Route::middleware(['auth'])->group(function() {
+
+                Route::controller(UserController::class)->group(function() {
                 
 
-                        Route::get('/', [UserController::class, 'Login']);
-                        Route::post('/login', [UserController::class, 'handleLogin'])->name('login'); 
-                
-                
                         Route::get('/register', [UserController::class, 'Register'])->name('register');
-                        Route::post('/postregister', [UserController::class, 'handleRegister'])->name('postregister');
+                        Route::post('/register', [UserController::class, 'handleRegister'])->name('postregister');
                 
-                        Route::get('/logout', function() {Auth()->logout();session()->flush();return redirect('/');})->name('deconnexion');
-        
+                });
+
+                Route::get('/logout', function() {Auth()->logout();session()->flush();return redirect('/');})->name('deconnexion');
+
         });
+
+        Route::middleware(['guest'])->group( function(){
+
+                Route::get('/', [loginController::class, 'Login'])->name('/');
+                Route::post('/login', [loginController::class, 'handleLogin'])->name('login');
+
+        });
+
+
+        
 
         Route::controller(PageController::class)->group( function() {
 
@@ -39,5 +51,5 @@ use App\Http\Controllers\UserController;
                 Route::get('/basic-table', [PageController::class, 'basictable']);
 
 
-                Route::get('/dashboard', [PageController::class, 'dashboard'])->name('accueil');
+                Route::get('/home', [PageController::class, 'dashboard'])->name('accueil');
         });

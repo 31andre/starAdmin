@@ -1,3 +1,4 @@
+@auth
 @include("partials._header")
 <body class="with-welcome-text">
   <div class="container-scroller">
@@ -837,3 +838,7 @@
 
 </html>
 
+    @else
+        {{redirect('/')}}
+
+@endauth
