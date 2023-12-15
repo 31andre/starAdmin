@@ -5,7 +5,7 @@
 <div class="card">
     <div class="car-body">
 
-        div.
+        
             <h1>
                 {{$article->titre}}
             </h1>
@@ -13,3 +13,4 @@
 </div>
     
 @endsection
+@include('partials._export')
