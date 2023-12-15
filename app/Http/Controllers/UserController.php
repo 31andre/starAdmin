@@ -19,11 +19,12 @@ class UserController extends Controller
         
     }
 
-    public function handleRegister(User $user, LoginRequest $request) {
+    public function handleRegister(User $user, Request $request) {
 
          $user->name = $request->nom;
          $user->email = $request->email;
          $user->password = $request->password;
+        //  dd($user);
          $user->save();
         return redirect()->intended('home');
         

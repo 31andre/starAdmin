@@ -51,7 +51,7 @@
                 
 
                 <div class="form-group">
-                  @error('nom')
+                  @error('email')
                     <div class="bg-danger text-wrap" style="width: 100%; color: white; text-align: center;">
                       ce champ est requis 
                     </div>
@@ -61,7 +61,7 @@
                 
                   
                 <div class="form-group">
-                  @error('nom')
+                  @error('password')
                     <div class="bg-danger text-wrap" style="width: 100%; color: white; text-align: center;">
                       ce champ est requis 
                     </div>
@@ -70,9 +70,10 @@
                 </div>
                 
                 
-                <div class="mt-3">
-                  <input class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" value="INSCRiPTION">
-                </div>
+                {{-- <div class="mt-3">
+                  <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="INSCRiPTION">
+                </div> --}}
+                <input type="submit" value="Inscription">
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   
                   {{-- <a href="#" class="auth-link text-black">Forgot password?</a> --}}

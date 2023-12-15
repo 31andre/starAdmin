@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\ArticleController;
+use App\Models\Article;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +29,7 @@ use App\Http\Controllers\loginController;
                 
 
                         Route::get('/register', [UserController::class, 'Register'])->name('register');
-                        Route::post('/register', [UserController::class, 'handleRegister'])->name('postregister');
+                        Route::post('/postregister', [UserController::class, 'handleRegister'])->name('postregister');
                 
                 });
 
@@ -52,4 +54,23 @@ use App\Http\Controllers\loginController;
 
 
                 Route::get('/home', [PageController::class, 'dashboard'])->name('accueil');
+        });
+
+        Route::controller(ArticleController::class)->group(function() {
+
+                Route::get('/ajouter-articles', [ArticleController::class, 'AjoutArticle'])->name('ajouter');
+
+                Route::get('/list-articles', [ArticleController::class, 'ListArticle'])->name('list');
+
+                Route::get('/update-article={id}', [ArticleController::class, 'Update'])->name('update');
+                Route::put('/update-article/{article}', [ArticleController::class, 'UpdateArticle'])->name('PutUpdate');
+
+                Route::get('/show-article={id}', [ArticleController::class, 'Show'])->name('show');
+
+                Route::post('/post-articles', [ArticleController::class, 'PostArticle'])->name('PostArticle');
+
+                Route::post('/Update-articles', [ArticleController::class, 'UpdateArticle'])->name('Updatearticle');
+
+                Route::get('/delete/{article}', function (Article $article) { $article->delete();return redirect()->back()->with('succcess', 'SUCCESS');})->name('delete');;
+                
         });
